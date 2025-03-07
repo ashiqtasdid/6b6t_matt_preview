@@ -93,14 +93,14 @@ const Footer = () => {
       whileInView="visible"
       viewport={{ once: true }}
       variants={footerVariants}
-      className="bg-slate-900 border-t border-slate-800 text-white"
+      className="bg-[#211F22] border-t border-slate-800 text-white"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Logo and description */}
           <div className="lg:col-span-2">
             <motion.div variants={itemVariants} className="flex items-center mb-4">
-              <div className="h-10 w-10 bg-[#08CFF9] rounded-md flex items-center justify-center text-slate-900 font-bold mr-3">
+              <div className="h-10 w-10 bg-[#08CFF9] rounded-md flex items-center justify-center text-[#211F22] font-bold mr-3">
                 <FaSkull size={24} />
               </div>
               <span className="text-2xl font-bold">
@@ -114,17 +114,17 @@ const Footer = () => {
               players simultaneously and use commands such as /tpa and /home.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="bg-slate-800 rounded-lg p-4 border border-slate-700">
+            <motion.div variants={itemVariants} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
               <div className="flex items-center mb-3">
                 <FaServer className="text-[#F7EB01] mr-2" />
                 <span className="font-medium">Server Address:</span>
               </div>
               <div className="flex items-center">
-                <code className="bg-slate-900 text-[#08CFF9] px-3 py-1.5 rounded-md flex-1">
+                <code className="bg-[#211F22] text-[#08CFF9] px-3 py-1.5 rounded-md flex-1">
                   play.6b6t.org
                 </code>
                 <button
-                  className="ml-2 px-3 py-1.5 bg-[#08CFF9] hover:bg-[#F7EB01] text-slate-900 font-medium rounded-md transition-colors text-sm"
+                  className="ml-2 px-3 py-1.5 bg-[#08CFF9] hover:bg-[#F7EB01] text-[#211F22] font-medium rounded-md transition-colors text-sm"
                   onClick={() => {
                     navigator.clipboard.writeText("play.6b6t.org");
                     alert("Server address copied!");
@@ -183,7 +183,7 @@ const Footer = () => {
             ].map((command) => (
               <div 
                 key={command.cmd} 
-                className="bg-slate-800 rounded-md p-3 border border-slate-700 hover:border-[#08CFF9] transition-colors"
+                className="bg-slate-800/40 rounded-md p-3 border border-slate-700 hover:border-[#08CFF9] transition-colors"
               >
                 <code className="text-[#08CFF9] block text-sm font-mono">
                   {command.cmd}
@@ -213,7 +213,7 @@ const Footer = () => {
               <FaTiktok key="tiktok" />,
             ].map((icon, i) => (
               <Link href="#" key={i}>
-                <div className="h-8 w-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#08CFF9] hover:text-slate-900 transition-colors">
+                <div className="h-8 w-8 rounded-full bg-slate-800/40 flex items-center justify-center text-slate-400 hover:bg-[#08CFF9] hover:text-[#211F22] transition-colors">
                   {icon}
                 </div>
               </Link>

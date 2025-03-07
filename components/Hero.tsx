@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { motion } from "motion/react"; // Fixed import
 import {
   FaDiscord,
   FaDownload,
@@ -94,7 +94,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative bg-slate-900 overflow-hidden min-h-screen">
+    <div className="relative bg-[#211F22] overflow-hidden min-h-screen">
       {/* Background with overlay */}
       {/* <div className="absolute inset-0 z-0">
         <Image
@@ -103,7 +103,7 @@ const Hero = () => {
           fill
           className="object-cover opacity-25"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-900"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#211F22] via-[#211F22]/90 to-[#211F22]"></div>
       </div> */}
 
       {/* Decorative elements */}
@@ -138,11 +138,11 @@ const Hero = () => {
               variants={itemVariants}
               className="flex flex-wrap gap-4"
             >
-              <button className="px-6 py-3 bg-[#08CFF9] hover:bg-[#F7EB01] text-slate-900 font-medium rounded-md shadow-md hover:shadow-lg transition-all duration-300 flex items-center">
+              <button className="px-6 py-3 bg-[#08CFF9] hover:bg-[#F7EB01] text-[#211F22] font-medium rounded-md shadow-md hover:shadow-lg transition-all duration-300 flex items-center">
                 <FaDownload className="mr-2" />
                 Play Now
               </button>
-              <button className="px-6 py-3 border border-slate-700 hover:border-[#F7EB01] bg-slate-800/50 hover:bg-slate-800 text-white font-medium rounded-md transition-all duration-300 flex items-center">
+              <button className="px-6 py-3 border border-slate-700 hover:border-[#F7EB01] bg-slate-800/40 hover:bg-slate-800/60 text-white font-medium rounded-md transition-all duration-300 flex items-center">
                 <FaFire className="mr-2 text-[#F7EB01]" />
                 Server Rules: None
               </button>
@@ -158,15 +158,15 @@ const Hero = () => {
                   <span>Join our Discord community</span>
                 </div>
                 <div className="flex flex-wrap gap-3">
-                  <span className="px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300 flex items-center">
+                  <span className="px-3 py-1 bg-slate-800/40 rounded-full text-sm text-slate-300 flex items-center">
                     <span className="w-1.5 h-1.5 bg-[#08CFF9] rounded-full mr-1.5"></span>
                     /tpa
                   </span>
-                  <span className="px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300 flex items-center">
+                  <span className="px-3 py-1 bg-slate-800/40 rounded-full text-sm text-slate-300 flex items-center">
                     <span className="w-1.5 h-1.5 bg-[#08CFF9] rounded-full mr-1.5"></span>
                     /home
                   </span>
-                  <span className="px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300 flex items-center">
+                  <span className="px-3 py-1 bg-slate-800/40 rounded-full text-sm text-slate-300 flex items-center">
                     <span className="w-1.5 h-1.5 bg-[#F7EB01] rounded-full mr-1.5"></span>
                     No Rules
                   </span>
@@ -188,7 +188,7 @@ const Hero = () => {
                   key={stat.label}
                   custom={i}
                   variants={statVariants}
-                  className="bg-slate-800 border border-slate-700 rounded-lg p-3 text-center"
+                  className="bg-slate-800/40 border border-slate-700 rounded-lg p-3 text-center"
                 >
                   <div className="text-2xl mb-1">{stat.icon}</div>
                   <div className="text-xl font-bold text-white">
@@ -226,7 +226,7 @@ const Hero = () => {
                   />
 
                   {/* Caption for each slide */}
-                  <div className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-sm px-3 py-1 rounded-full text-sm text-white border border-slate-700">
+                  <div className="absolute top-4 left-4 bg-[#211F22]/80 backdrop-blur-sm px-3 py-1 rounded-full text-sm text-white border border-slate-700">
                     {currentSlide === 0 && "Spawn Area"}
                     {currentSlide === 1 && "Player Battles"}
                     {currentSlide === 2 && "Base Building"}
@@ -245,7 +245,7 @@ const Hero = () => {
               <div className="absolute top-1/2 -translate-y-1/2 left-4">
                 <button
                   onClick={prevSlide}
-                  className="bg-slate-900/70 hover:bg-slate-900 border border-slate-700 rounded-full p-2 text-white transition-all"
+                  className="bg-[#211F22]/70 hover:bg-[#211F22] border border-slate-700 rounded-full p-2 text-white transition-all"
                   aria-label="Previous slide"
                 >
                   <FaArrowLeft size={16} />
@@ -255,7 +255,7 @@ const Hero = () => {
               <div className="absolute top-1/2 -translate-y-1/2 right-4">
                 <button
                   onClick={nextSlide}
-                  className="bg-slate-900/70 hover:bg-slate-900 border border-slate-700 rounded-full p-2 text-white transition-all"
+                  className="bg-[#211F22]/70 hover:bg-[#211F22] border border-slate-700 rounded-full p-2 text-white transition-all"
                   aria-label="Next slide"
                 >
                   <FaArrowRight size={16} />
@@ -282,16 +282,16 @@ const Hero = () => {
               </div>
 
               {/* Floating server info card */}
-              <div className="absolute bottom-4 right-4 left-4 bg-slate-900/90 backdrop-blur-sm border border-slate-700 rounded-lg p-4 shadow-lg">
+              <div className="absolute bottom-4 right-4 left-4 bg-[#211F22]/90 backdrop-blur-sm border border-slate-700 rounded-lg p-4 shadow-lg">
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-white font-medium">Server Address</h3>
                     <div className="flex items-center mt-1">
-                      <code className="bg-slate-800 text-[#08CFF9] px-2 py-1 rounded text-sm">
+                      <code className="bg-slate-800/40 text-[#08CFF9] px-2 py-1 rounded text-sm">
                         play.6b6t.org
                       </code>
                       <button
-                        className="ml-2 text-xs bg-slate-800 hover:bg-slate-700 text-white px-2 py-1 rounded transition-colors"
+                        className="ml-2 text-xs bg-slate-800/40 hover:bg-slate-700/40 text-white px-2 py-1 rounded transition-colors"
                         onClick={() => {
                           navigator.clipboard.writeText("play.6b6t.org");
                           alert("Server address copied to clipboard!");
@@ -310,17 +310,17 @@ const Hero = () => {
             </div>
 
             {/* Version badge */}
-            <div className="absolute -top-3 -right-3 bg-[#08CFF9] text-slate-900 font-bold px-3 py-1 rounded-full text-sm shadow-lg border-2 border-slate-800 z-10">
+            <div className="absolute -top-3 -right-3 bg-[#08CFF9] text-[#211F22] font-bold px-3 py-1 rounded-full text-sm shadow-lg border-2 border-slate-800 z-10">
               v1.19.2
             </div>
 
             {/* Anarchy badge */}
-            <div className="absolute top-12 -right-2 bg-[#F7EB01] text-slate-900 font-bold px-3 py-1 rounded-md text-sm shadow-lg border-2 border-slate-800 z-10 transform rotate-12">
+            <div className="absolute top-12 -right-2 bg-[#F7EB01] text-[#211F22] font-bold px-3 py-1 rounded-md text-sm shadow-lg border-2 border-slate-800 z-10 transform rotate-12">
               TRUE ANARCHY
             </div>
 
             {/* Slideshow counter */}
-            <div className="absolute -top-3 -left-3 bg-slate-800 text-white px-3 py-1 rounded-full text-xs shadow-lg border-2 border-slate-700 z-10">
+            <div className="absolute -top-3 -left-3 bg-slate-800/40 text-white px-3 py-1 rounded-full text-xs shadow-lg border-2 border-slate-700 z-10">
               {currentSlide + 1} / {previewImages.length}
             </div>
           </motion.div>

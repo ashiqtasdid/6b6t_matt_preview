@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "motion/react"; // Fixed import
 import {
   FaChevronDown,
   FaQuestion,
@@ -36,11 +36,11 @@ const Faq = () => {
           6b6t is a Minecraft anarchy server where players can enjoy full
           freedom with no rules. It offers a unique experience with commands
           like{" "}
-          <code className="text-[#08CFF9] bg-slate-800 px-1.5 py-0.5 rounded">
+          <code className="text-[#08CFF9] bg-slate-800/50 px-1.5 py-0.5 rounded">
             /tpa
           </code>{" "}
           and{" "}
-          <code className="text-[#08CFF9] bg-slate-800 px-1.5 py-0.5 rounded">
+          <code className="text-[#08CFF9] bg-slate-800/50 px-1.5 py-0.5 rounded">
             /home
           </code>{" "}
           to make exploration and gameplay smoother. Unlike many other servers,
@@ -57,11 +57,11 @@ const Faq = () => {
         <p>
           6b6t was started on January 16th, 2022. From day one, it had the
           commands{" "}
-          <code className="text-[#08CFF9] bg-slate-800 px-1.5 py-0.5 rounded">
+          <code className="text-[#08CFF9] bg-slate-800/50 px-1.5 py-0.5 rounded">
             /tpa
           </code>{" "}
           and{" "}
-          <code className="text-[#08CFF9] bg-slate-800 px-1.5 py-0.5 rounded">
+          <code className="text-[#08CFF9] bg-slate-800/50 px-1.5 py-0.5 rounded">
             /home
           </code>
           . On the first day 6b6t reached 50 players online.
@@ -74,11 +74,11 @@ const Faq = () => {
       answer: (
         <p>
           6b6t has many commands, but the most frequently used ones are{" "}
-          <code className="text-[#08CFF9] bg-slate-800 px-1.5 py-0.5 rounded">
+          <code className="text-[#08CFF9] bg-slate-800/50 px-1.5 py-0.5 rounded">
             /tpa
           </code>{" "}
           and{" "}
-          <code className="text-[#08CFF9] bg-slate-800 px-1.5 py-0.5 rounded">
+          <code className="text-[#08CFF9] bg-slate-800/50 px-1.5 py-0.5 rounded">
             /home
           </code>
           . You can see the full list of commands on the{" "}
@@ -125,11 +125,11 @@ const Faq = () => {
             edition.
           </p>
           <div className="flex mt-3 space-x-4">
-            <div className="bg-slate-800 px-3 py-1.5 rounded-md flex items-center">
+            <div className="bg-slate-800/50 px-3 py-1.5 rounded-md flex items-center">
               <span className="h-2 w-2 rounded-full bg-[#08CFF9] mr-2"></span>
               <span>Java Edition</span>
             </div>
-            <div className="bg-slate-800 px-3 py-1.5 rounded-md flex items-center">
+            <div className="bg-slate-800/50 px-3 py-1.5 rounded-md flex items-center">
               <span className="h-2 w-2 rounded-full bg-[#F7EB01] mr-2"></span>
               <span>Bedrock Edition</span>
             </div>
@@ -143,8 +143,8 @@ const Faq = () => {
       answer: (
         <div>
           <p className="mb-2">6b6t is over 20TB.</p>
-          <div className="bg-slate-800 rounded-lg p-3 border border-slate-700 mt-2">
-            <div className="h-3 rounded-full bg-slate-700 overflow-hidden">
+          <div className="bg-slate-800/50 rounded-lg p-3 border border-slate-700 mt-2">
+            <div className="h-3 rounded-full bg-slate-700/70 overflow-hidden">
               <div className="h-full bg-gradient-to-r from-[#08CFF9] to-[#F7EB01] w-[80%]"></div>
             </div>
             <div className="flex justify-between mt-2 text-xs text-slate-400">
@@ -162,7 +162,7 @@ const Faq = () => {
       answer: (
         <div>
           <p>Over 500,000 unique players joined 6b6t since the start.</p>
-          <div className="flex items-center justify-center bg-slate-800 rounded-lg p-4 border border-slate-700 mt-3">
+          <div className="flex items-center justify-center bg-slate-800/50 rounded-lg p-4 border border-slate-700 mt-3">
             <span className="text-3xl font-bold text-[#08CFF9]">500,000+</span>
             <FaUserFriends className="ml-3 text-2xl text-[#F7EB01]" />
           </div>
@@ -195,7 +195,7 @@ const Faq = () => {
   };
 
   return (
-    <div className="bg-slate-900 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#211F22] py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <motion.div
           className="text-center mb-12"
@@ -217,8 +217,8 @@ const Faq = () => {
               key={index}
               className={`border ${
                 activeIndex === index
-                  ? "border-[#08CFF9] bg-slate-800/50"
-                  : "border-slate-700 bg-slate-800/30"
+                  ? "border-[#08CFF9] bg-slate-800/30"
+                  : "border-slate-700 bg-slate-800/20"
               } rounded-lg overflow-hidden transition-colors duration-200`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

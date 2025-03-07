@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import React, { useState, useCallback } from "react";
+import { motion, AnimatePresence } from "motion/react"; // Fixed import
 import Image from "next/image";
 import {
   FaTimes,
@@ -136,7 +136,7 @@ const Gallery = () => {
       : galleryImages.filter((img) => img.category === activeFilter);
 
   // Navigate between images in lightbox
-  const navigateImage = (direction: "next" | "prev") => {
+  const navigateImage = useCallback((direction: "next" | "prev") => {
     if (!selectedImage) return;
 
     const currentIndex = filteredImages.findIndex(
@@ -152,7 +152,7 @@ const Gallery = () => {
     }
 
     setSelectedImage(filteredImages[newIndex]);
-  };
+  }, [selectedImage, filteredImages]);
 
   // Handle keyboard navigation
   React.useEffect(() => {
@@ -166,10 +166,10 @@ const Gallery = () => {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedImage, filteredImages]);
+  }, [selectedImage, navigateImage]);
 
   return (
-    <div className="bg-slate-900 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#211F22] py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-12"
@@ -194,8 +194,8 @@ const Gallery = () => {
               onClick={() => setActiveFilter(category.id)}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
                 activeFilter === category.id
-                  ? "bg-[#08CFF9] text-slate-900"
-                  : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                  ? "bg-[#08CFF9] text-[#211F22]"
+                  : "bg-slate-800/40 text-slate-300 hover:bg-slate-800/60"
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -214,7 +214,7 @@ const Gallery = () => {
             {filteredImages.map((image) => (
               <motion.div
                 key={image.id}
-                className="relative aspect-square overflow-hidden rounded-lg border border-slate-700 bg-slate-800 cursor-pointer group"
+                className="relative aspect-square overflow-hidden rounded-lg border border-slate-700 bg-slate-800/40 cursor-pointer group"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
@@ -230,7 +230,7 @@ const Gallery = () => {
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#211F22] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-0 left-0 right-0 p-3">
                     <h3 className="text-white font-medium">{image.alt}</h3>
                     <div className="flex items-center mt-1 text-xs text-slate-300">
@@ -239,7 +239,7 @@ const Gallery = () => {
                     </div>
                   </div>
                   <div className="absolute top-2 right-2">
-                    <FaExpand className="text-white bg-slate-800/70 p-1 rounded-full h-6 w-6" />
+                    <FaExpand className="text-white bg-[#211F22]/70 p-1 rounded-full h-6 w-6" />
                   </div>
                 </div>
               </motion.div>
@@ -265,15 +265,12 @@ const Gallery = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/95 backdrop-blur-sm p-4"
+              className="fixed inset-0 z-50 flex items-center justify-center bg-[#211F22]/95 backdrop-blur-sm p-4"
               onClick={() => setSelectedImage(null)}
             >
               <motion.div
-                className="relative max-w-5xl w-full max-h-[90vh] bg-slate-800 rounded-lg border border-slate-700 overflow-hidden"
-                /* eslint-disable  @typescript-eslint/no-explicit-any */
-                onClick={(e: { stopPropagation: () => any }) =>
-                  e.stopPropagation()
-                }
+                className="relative max-w-5xl w-full max-h-[90vh] bg-slate-800/40 rounded-lg border border-slate-700 overflow-hidden"
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
@@ -291,8 +288,8 @@ const Gallery = () => {
 
                 {/* Navigation buttons */}
                 <button
-                  className="absolute top-1/2 left-4 -translate-y-1/2 bg-slate-900/60 hover:bg-slate-900/90 text-white p-3 rounded-full"
-                  onClick={(e) => {
+                  className="absolute top-1/2 left-4 -translate-y-1/2 bg-[#211F22]/60 hover:bg-[#211F22]/90 text-white p-3 rounded-full"
+                  onClick={(e: React.MouseEvent) => {
                     e.stopPropagation();
                     navigateImage("prev");
                   }}
@@ -301,8 +298,8 @@ const Gallery = () => {
                 </button>
 
                 <button
-                  className="absolute top-1/2 right-4 -translate-y-1/2 bg-slate-900/60 hover:bg-slate-900/90 text-white p-3 rounded-full"
-                  onClick={(e) => {
+                  className="absolute top-1/2 right-4 -translate-y-1/2 bg-[#211F22]/60 hover:bg-[#211F22]/90 text-white p-3 rounded-full"
+                  onClick={(e: React.MouseEvent) => {
                     e.stopPropagation();
                     navigateImage("next");
                   }}
@@ -312,7 +309,7 @@ const Gallery = () => {
 
                 {/* Close button */}
                 <button
-                  className="absolute top-4 right-4 bg-slate-900/60 hover:bg-slate-900/90 text-white p-2 rounded-full"
+                  className="absolute top-4 right-4 bg-[#211F22]/60 hover:bg-[#211F22]/90 text-white p-2 rounded-full"
                   onClick={() => setSelectedImage(null)}
                 >
                   <FaTimes />
@@ -324,7 +321,7 @@ const Gallery = () => {
                     {selectedImage.alt}
                   </h3>
                   <div className="flex items-center mt-1 text-sm text-slate-400">
-                    <span className="px-2 py-1 bg-slate-900 rounded-md mr-3 text-[#08CFF9] text-xs">
+                    <span className="px-2 py-1 bg-[#211F22]/70 rounded-md mr-3 text-[#08CFF9] text-xs">
                       {categories.find((c) => c.id === selectedImage.category)
                         ?.name || selectedImage.category}
                     </span>

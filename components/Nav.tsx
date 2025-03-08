@@ -76,14 +76,15 @@ const Nav = () => {
           : "bg-[#211F22]/90 backdrop-blur-sm"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* UPDATED: max width to match Hero component */}
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link href="/">
               <div className="flex items-center cursor-pointer group">
                 {/* Server logo with solid color */}
                 <div className="h-9 w-9 bg-[#08CFF9] rounded-md mr-3 flex items-center justify-center text-[#211F22] font-bold shadow-md group-hover:bg-[#F7EB01] transition-all duration-300">
-                  <Image src={'/assets/logo.png'} height={60} width={60} alt="logo"/>
+                  <Image src='/assets/logo.png' alt="logo" height={50} width={50}/>
                 </div>
                 <div>
                   <span
@@ -150,42 +151,45 @@ const Nav = () => {
 
               <div className="h-6 border-r border-slate-700 mx-1"></div>
 
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.title}
-                  custom={i}
-                  variants={menuItemVariants}
-                  className="relative"
-                >
-                  <Link href={link.href}>
-                    <div
-                      className={`px-3 py-2 rounded-md text-sm font-medium flex items-center space-x-2 transition-all duration-200
-                        ${
-                          activeLink === link.href
-                            ? "bg-slate-800/40 text-[#08CFF9] border-slate-700"
-                            : "text-slate-300 hover:bg-slate-800/30 hover:text-[#08CFF9]"
-                        }`}
-                    >
-                      {link.icon && (
-                        <span className="text-base">{link.icon}</span>
-                      )}
-                      <span>{link.title}</span>
-                    </div>
-                  </Link>
-                  {activeLink === link.href && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#08CFF9]"
-                      initial={false}
-                      transition={{
-                        type: "spring",
-                        stiffness: 500,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-                </motion.div>
-              ))}
+              {/* Increased horizontal spacing between nav items */}
+              <div className="flex items-center space-x-3">
+                {navLinks.map((link, i) => (
+                  <motion.div
+                    key={link.title}
+                    custom={i}
+                    variants={menuItemVariants}
+                    className="relative"
+                  >
+                    <Link href={link.href}>
+                      <div
+                        className={`px-3 py-2 rounded-md text-sm font-medium flex items-center space-x-2 transition-all duration-200
+                          ${
+                            activeLink === link.href
+                              ? "bg-slate-800/40 text-[#08CFF9] border-slate-700"
+                              : "text-slate-300 hover:bg-slate-800/30 hover:text-[#08CFF9]"
+                          }`}
+                      >
+                        {link.icon && (
+                          <span className="text-base">{link.icon}</span>
+                        )}
+                        <span>{link.title}</span>
+                      </div>
+                    </Link>
+                    {activeLink === link.href && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#08CFF9]"
+                        initial={false}
+                        transition={{
+                          type: "spring",
+                          stiffness: 500,
+                          damping: 30,
+                        }}
+                      />
+                    )}
+                  </motion.div>
+                ))}
+              </div>
 
               <div className="h-6 border-r border-slate-700 mx-1"></div>
 
@@ -223,7 +227,8 @@ const Nav = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden bg-[#211F22] border-b border-slate-700"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {/* UPDATED: max width to match Hero component */}
+            <div className="max-w-[90rem] mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <div className="px-3 py-2.5 flex items-center bg-slate-800/40 rounded-md mb-1 border border-slate-700">
                 <span className="h-2 w-2 rounded-full bg-[#08CFF9] mr-2 animate-pulse"></span>
                 <span className="text-slate-300 text-sm">

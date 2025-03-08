@@ -95,31 +95,20 @@ const Hero = () => {
 
   return (
     <div className="relative bg-[#211F22] overflow-hidden min-h-screen">
-      {/* Background with overlay */}
-      {/* <div className="absolute inset-0 z-0">
-        <Image
-          src="/assets/images/bg.jpg" // Replace with an anarchy-themed background
-          alt="6b6t Anarchy Server"
-          fill
-          className="object-cover opacity-25"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#211F22] via-[#211F22]/90 to-[#211F22]"></div>
-      </div> */}
-
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-40 h-40 bg-[#08CFF9]/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 right-10 w-60 h-60 bg-[#F7EB01]/10 rounded-full blur-3xl"></div>
 
-      {/* Hero content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+      {/* Hero content - WIDER */}
+      <div className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"
         >
           {/* Left column - Text content */}
-          <div className="space-y-8">
+          <div className="lg:col-span-5 space-y-8">
             <motion.div variants={itemVariants} className="space-y-2">
               <h2 className="text-[#08CFF9] font-semibold text-lg flex items-center">
                 <FaSkull className="mr-2 text-[#F7EB01]" /> 
@@ -177,7 +166,7 @@ const Hero = () => {
             {/* Server stats */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-3 gap-3 sm:gap-6"
+              className="grid grid-cols-3 gap-3 sm:gap-4"
             >
               {[
                 { label: "Online Players", value: "627", icon: "👥" },
@@ -188,10 +177,10 @@ const Hero = () => {
                   key={stat.label}
                   custom={i}
                   variants={statVariants}
-                  className="bg-slate-800/40 border border-slate-700 rounded-lg p-3 text-center"
+                  className="bg-slate-800/40 border border-slate-700 rounded-lg p-2 text-center"
                 >
-                  <div className="text-2xl mb-1">{stat.icon}</div>
-                  <div className="text-xl font-bold text-white">
+                  <div className="text-xl mb-1">{stat.icon}</div>
+                  <div className="text-lg font-bold text-white">
                     {stat.value}
                   </div>
                   <div className="text-xs text-slate-400">{stat.label}</div>
@@ -203,9 +192,9 @@ const Hero = () => {
           {/* Right column - Server preview slideshow */}
           <motion.div
             variants={itemVariants}
-            className="relative hidden lg:block"
+            className="relative hidden lg:block lg:col-span-7"
           >
-            <div className="relative h-[500px] w-full border-4 border-slate-800 rounded-lg overflow-hidden shadow-xl">
+            <div className="relative h-[520px] w-full border-4 border-slate-800 rounded-lg overflow-hidden shadow-xl">
               {/* Slideshow */}
               <div className="relative h-full w-full">
                 <motion.div

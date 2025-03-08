@@ -170,7 +170,8 @@ const Gallery = () => {
 
   return (
     <div className="bg-[#211F22] py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+      {/* UPDATED: Changed max-w-7xl to max-w-[90rem] to match Hero and Nav */}
+      <div className="max-w-[90rem] mx-auto">
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -187,7 +188,7 @@ const Gallery = () => {
         </motion.div>
 
         {/* Filter Categories */}
-        <div className="mb-10 flex flex-wrap justify-center gap-2">
+        <div className="mb-10 flex flex-wrap justify-center gap-3">
           {categories.map((category) => (
             <motion.button
               key={category.id}
@@ -205,9 +206,9 @@ const Gallery = () => {
           ))}
         </div>
 
-        {/* Gallery Grid */}
+        {/* Gallery Grid - UPDATED: Changed to 5 columns on large screens */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
           layout
         >
           <AnimatePresence>
@@ -228,7 +229,7 @@ const Gallery = () => {
                   alt={image.alt}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#211F22] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-0 left-0 right-0 p-3">
@@ -258,7 +259,7 @@ const Gallery = () => {
           </motion.div>
         )}
 
-        {/* Lightbox */}
+        {/* Lightbox - UPDATED: Increased max-width */}
         <AnimatePresence>
           {selectedImage && (
             <motion.div
@@ -269,7 +270,7 @@ const Gallery = () => {
               onClick={() => setSelectedImage(null)}
             >
               <motion.div
-                className="relative max-w-5xl w-full max-h-[90vh] bg-slate-800/40 rounded-lg border border-slate-700 overflow-hidden"
+                className="relative max-w-6xl w-full max-h-[90vh] bg-slate-800/40 rounded-lg border border-slate-700 overflow-hidden"
                 onClick={(e: React.MouseEvent) => e.stopPropagation()}
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -282,7 +283,7 @@ const Gallery = () => {
                     alt={selectedImage.alt}
                     fill
                     className="object-contain"
-                    sizes="(max-width: 1024px) 100vw, 1024px"
+                    sizes="(max-width: 1280px) 100vw, 1280px"
                   />
                 </div>
 

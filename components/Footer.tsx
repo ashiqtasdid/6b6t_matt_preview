@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { motion } from "motion/react"; 
+import { motion } from "motion/react";
 import {
   FaDiscord,
   FaYoutube,
@@ -95,10 +95,12 @@ const Footer = () => {
       variants={footerVariants}
       className="bg-[#211F22] border-t border-slate-800 text-white"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
-          {/* Logo and description */}
-          <div className="lg:col-span-2">
+      {/* UPDATED: Changed max-w-7xl to max-w-[90rem] to match other components */}
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* UPDATED: Changed grid layout for better use of wider space */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
+          {/* Logo and description - UPDATED: Now spans 3 columns instead of 2 */}
+          <div className="lg:col-span-3">
             <motion.div variants={itemVariants} className="flex items-center mb-4">
               <div className="h-10 w-10 bg-[#08CFF9] rounded-md flex items-center justify-center text-[#211F22] font-bold mr-3">
                 <FaSkull size={24} />
@@ -108,23 +110,24 @@ const Footer = () => {
               </span>
             </motion.div>
 
-            <motion.p variants={itemVariants} className="text-slate-300 mb-6 max-w-md">
+            <motion.p variants={itemVariants} className="text-slate-300 mb-6 max-w-xl">
               6b6t is a survival Minecraft anarchy server with no rules, no punishments and 
               no queue. Players can do whatever they want in a world supporting up to 1000 
               players simultaneously and use commands such as /tpa and /home.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+            {/* UPDATED: Wider server info box with more prominent design */}
+            <motion.div variants={itemVariants} className="bg-slate-800/50 rounded-lg p-5 border border-slate-700 shadow-md">
               <div className="flex items-center mb-3">
                 <FaServer className="text-[#F7EB01] mr-2" />
                 <span className="font-medium">Server Address:</span>
               </div>
               <div className="flex items-center">
-                <code className="bg-[#211F22] text-[#08CFF9] px-3 py-1.5 rounded-md flex-1">
+                <code className="bg-[#211F22] text-[#08CFF9] px-3 py-2 rounded-md flex-1 font-medium">
                   play.6b6t.org
                 </code>
                 <button
-                  className="ml-2 px-3 py-1.5 bg-[#08CFF9] hover:bg-[#F7EB01] text-[#211F22] font-medium rounded-md transition-colors text-sm"
+                  className="ml-3 px-4 py-2 bg-[#08CFF9] hover:bg-[#F7EB01] text-[#211F22] font-medium rounded-md transition-colors"
                   onClick={() => {
                     navigator.clipboard.writeText("play.6b6t.org");
                     alert("Server address copied!");
@@ -146,7 +149,7 @@ const Footer = () => {
               <h3 className="font-semibold text-lg border-b border-slate-800 pb-2">
                 {group.title}
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {group.links.map((link) => (
                   <li key={link.name}>
                     <Link href={link.href}>
@@ -169,10 +172,11 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Most useful commands section */}
-        <motion.div variants={itemVariants} className="mt-12 pt-6 border-t border-slate-800">
-          <h3 className="font-semibold text-lg mb-4">Most useful commands</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        {/* Most useful commands section - UPDATED: Now supports more columns on wide screens */}
+        <motion.div variants={itemVariants} className="mt-16 pt-8 border-t border-slate-800">
+          <h3 className="font-semibold text-lg mb-6">Most useful commands</h3>
+          {/* UPDATED: Added extra columns for wider displays */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
             {[
               { cmd: "/tpa <player>", desc: "Teleport to a player" },
               { cmd: "/home", desc: "Go to your home" },
@@ -180,6 +184,8 @@ const Footer = () => {
               { cmd: "/spawn", desc: "Return to spawn" },
               { cmd: "/msg <player>", desc: "Message a player" },
               { cmd: "/vote", desc: "Vote for rewards" },
+              { cmd: "/kit", desc: "Get starter items" }, // Added extra commands for wider layout
+              { cmd: "/ignore", desc: "Block a player" },
             ].map((command) => (
               <div 
                 key={command.cmd} 
@@ -199,7 +205,7 @@ const Footer = () => {
         {/* Copyright */}
         <motion.div 
           variants={itemVariants}
-          className="mt-12 pt-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
+          className="mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
         >
           <div className="text-slate-400 text-sm">
             © 2025 6b6t. All Rights Reserved.

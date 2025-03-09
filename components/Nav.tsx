@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "motion/react"; // Fixed import
+import { motion, AnimatePresence } from "motion/react"; 
 import {
   FaHome,
   FaBlog,
@@ -76,13 +76,11 @@ const Nav = () => {
           : "bg-[#211F22]/90 backdrop-blur-sm"
       }`}
     >
-      {/* UPDATED: max width to match Hero component */}
       <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link href="/">
               <div className="flex items-center cursor-pointer group">
-                {/* Server logo with solid color */}
                 <div className="h-9 w-9 bg-[#08CFF9] rounded-md mr-3 flex items-center justify-center text-[#211F22] font-bold shadow-md group-hover:bg-[#F7EB01] transition-all duration-300">
                   <Image src='/assets/logo.png' alt="logo" height={50} width={50}/>
                 </div>
@@ -151,7 +149,6 @@ const Nav = () => {
 
               <div className="h-6 border-r border-slate-700 mx-1"></div>
 
-              {/* Increased horizontal spacing between nav items */}
               <div className="flex items-center space-x-3">
                 {navLinks.map((link, i) => (
                   <motion.div
@@ -227,7 +224,6 @@ const Nav = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden bg-[#211F22] border-b border-slate-700"
           >
-            {/* UPDATED: max width to match Hero component */}
             <div className="max-w-[90rem] mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <div className="px-3 py-2.5 flex items-center bg-slate-800/40 rounded-md mb-1 border border-slate-700">
                 <span className="h-2 w-2 rounded-full bg-[#08CFF9] mr-2 animate-pulse"></span>

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { motion } from "motion/react"; // Fixed import
+import { motion } from "motion/react"; 
 import {
   FaDiscord,
   FaDownload,
@@ -13,11 +13,9 @@ import {
 import Image from "next/image";
 
 const Hero = () => {
-  // State for slideshow
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoplay, setIsAutoplay] = useState(true);
 
-  // Server preview images
   const previewImages = [
     "/assets/images/1.png",
     "/assets/images/2.png",
@@ -31,7 +29,6 @@ const Hero = () => {
     "/assets/images/10.png",
   ];
 
-  // Handle slide navigation
   const nextSlide = () => {
     setCurrentSlide((prev) =>
       prev === previewImages.length - 1 ? 0 : prev + 1
@@ -46,7 +43,6 @@ const Hero = () => {
     setIsAutoplay(false);
   };
 
-  // Autoplay slideshow
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
@@ -61,7 +57,6 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, [isAutoplay, previewImages.length]);
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -95,11 +90,9 @@ const Hero = () => {
 
   return (
     <div className="relative bg-[#211F22] overflow-hidden min-h-screen">
-      {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-40 h-40 bg-[#08CFF9]/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 right-10 w-60 h-60 bg-[#F7EB01]/10 rounded-full blur-3xl"></div>
 
-      {/* Hero content - WIDER */}
       <div className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
         <motion.div
           variants={containerVariants}
@@ -107,7 +100,6 @@ const Hero = () => {
           animate="visible"
           className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"
         >
-          {/* Left column - Text content */}
           <div className="lg:col-span-5 space-y-8">
             <motion.div variants={itemVariants} className="space-y-2">
               <h2 className="text-[#08CFF9] font-semibold text-lg flex items-center">
@@ -163,7 +155,6 @@ const Hero = () => {
               </div>
             </motion.div>
 
-            {/* Server stats */}
             <motion.div
               variants={itemVariants}
               className="grid grid-cols-3 gap-3 sm:gap-4"
@@ -189,13 +180,11 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Right column - Server preview slideshow */}
           <motion.div
             variants={itemVariants}
             className="relative hidden lg:block lg:col-span-7"
           >
             <div className="relative h-[520px] w-full border-4 border-slate-800 rounded-lg overflow-hidden shadow-xl">
-              {/* Slideshow */}
               <div className="relative h-full w-full">
                 <motion.div
                   key={currentSlide}
@@ -214,7 +203,6 @@ const Hero = () => {
                     priority={currentSlide === 0}
                   />
 
-                  {/* Caption for each slide */}
                   <div className="absolute top-4 left-4 bg-[#211F22]/80 backdrop-blur-sm px-3 py-1 rounded-full text-sm text-white border border-slate-700">
                     {currentSlide === 0 && "Spawn Area"}
                     {currentSlide === 1 && "Player Battles"}
@@ -230,7 +218,6 @@ const Hero = () => {
                 </motion.div>
               </div>
 
-              {/* Navigation controls */}
               <div className="absolute top-1/2 -translate-y-1/2 left-4">
                 <button
                   onClick={prevSlide}
@@ -251,7 +238,6 @@ const Hero = () => {
                 </button>
               </div>
 
-              {/* Slide indicators */}
               <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-2">
                 {previewImages.map((_, index) => (
                   <button
@@ -270,7 +256,6 @@ const Hero = () => {
                 ))}
               </div>
 
-              {/* Floating server info card */}
               <div className="absolute bottom-4 right-4 left-4 bg-[#211F22]/90 backdrop-blur-sm border border-slate-700 rounded-lg p-4 shadow-lg">
                 <div className="flex items-center justify-between">
                   <div>
@@ -298,24 +283,20 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Version badge */}
             <div className="absolute -top-3 -right-3 bg-[#08CFF9] text-[#211F22] font-bold px-3 py-1 rounded-full text-sm shadow-lg border-2 border-slate-800 z-10">
               v1.19.2
             </div>
 
-            {/* Anarchy badge */}
             <div className="absolute top-12 -right-2 bg-[#F7EB01] text-[#211F22] font-bold px-3 py-1 rounded-md text-sm shadow-lg border-2 border-slate-800 z-10 transform rotate-12">
               TRUE ANARCHY
             </div>
 
-            {/* Slideshow counter */}
             <div className="absolute -top-3 -left-3 bg-slate-800/40 text-white px-3 py-1 rounded-full text-xs shadow-lg border-2 border-slate-700 z-10">
               {currentSlide + 1} / {previewImages.length}
             </div>
           </motion.div>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
           animate={{ y: [0, 10, 0] }}

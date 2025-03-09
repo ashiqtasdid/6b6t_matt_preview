@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "motion/react"; // Fixed import
+import { motion, AnimatePresence } from "motion/react"; 
 import Image from "next/image";
 import {
   FaTimes,
@@ -24,7 +24,6 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("all");
 
-  // Gallery images - using the same images from Hero component
   const galleryImages: GalleryImage[] = [
     {
       id: 1,
@@ -118,7 +117,6 @@ const Gallery = () => {
     },
   ];
 
-  // Filter categories based on actual categories in the images
   const categories = [
     { id: "all", name: "All" },
     { id: "landmarks", name: "Landmarks" },
@@ -129,13 +127,11 @@ const Gallery = () => {
     { id: "raids", name: "Raids" },
   ];
 
-  // Filter images based on selected category
   const filteredImages =
     activeFilter === "all"
       ? galleryImages
       : galleryImages.filter((img) => img.category === activeFilter);
 
-  // Navigate between images in lightbox
   const navigateImage = useCallback((direction: "next" | "prev") => {
     if (!selectedImage) return;
 
@@ -154,7 +150,6 @@ const Gallery = () => {
     setSelectedImage(filteredImages[newIndex]);
   }, [selectedImage, filteredImages]);
 
-  // Handle keyboard navigation
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!selectedImage) return;
@@ -170,7 +165,6 @@ const Gallery = () => {
 
   return (
     <div className="bg-[#211F22] py-16 px-4 sm:px-6 lg:px-8">
-      {/* UPDATED: Changed max-w-7xl to max-w-[90rem] to match Hero and Nav */}
       <div className="max-w-[90rem] mx-auto">
         <motion.div
           className="text-center mb-12"
@@ -187,7 +181,6 @@ const Gallery = () => {
           </p>
         </motion.div>
 
-        {/* Filter Categories */}
         <div className="mb-10 flex flex-wrap justify-center gap-3">
           {categories.map((category) => (
             <motion.button
@@ -206,7 +199,6 @@ const Gallery = () => {
           ))}
         </div>
 
-        {/* Gallery Grid - UPDATED: Changed to 5 columns on large screens */}
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
           layout
@@ -259,7 +251,6 @@ const Gallery = () => {
           </motion.div>
         )}
 
-        {/* Lightbox - UPDATED: Increased max-width */}
         <AnimatePresence>
           {selectedImage && (
             <motion.div

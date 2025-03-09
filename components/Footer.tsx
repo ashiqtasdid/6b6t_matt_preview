@@ -82,7 +82,6 @@ const Footer = () => {
     },
   ];
 
-  // Helper function to check if link has icon
   const hasIcon = (link: LinkItem): link is LinkWithIcon => {
     return 'icon' in link;
   };
@@ -95,11 +94,8 @@ const Footer = () => {
       variants={footerVariants}
       className="bg-[#211F22] border-t border-slate-800 text-white"
     >
-      {/* UPDATED: Changed max-w-7xl to max-w-[90rem] to match other components */}
       <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* UPDATED: Changed grid layout for better use of wider space */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
-          {/* Logo and description - UPDATED: Now spans 3 columns instead of 2 */}
           <div className="lg:col-span-3">
             <motion.div variants={itemVariants} className="flex items-center mb-4">
               <div className="h-10 w-10 bg-[#08CFF9] rounded-md flex items-center justify-center text-[#211F22] font-bold mr-3">
@@ -116,7 +112,6 @@ const Footer = () => {
               players simultaneously and use commands such as /tpa and /home.
             </motion.p>
 
-            {/* UPDATED: Wider server info box with more prominent design */}
             <motion.div variants={itemVariants} className="bg-slate-800/50 rounded-lg p-5 border border-slate-700 shadow-md">
               <div className="flex items-center mb-3">
                 <FaServer className="text-[#F7EB01] mr-2" />
@@ -172,10 +167,8 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Most useful commands section - UPDATED: Now supports more columns on wide screens */}
         <motion.div variants={itemVariants} className="mt-16 pt-8 border-t border-slate-800">
           <h3 className="font-semibold text-lg mb-6">Most useful commands</h3>
-          {/* UPDATED: Added extra columns for wider displays */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
             {[
               { cmd: "/tpa <player>", desc: "Teleport to a player" },
@@ -184,7 +177,7 @@ const Footer = () => {
               { cmd: "/spawn", desc: "Return to spawn" },
               { cmd: "/msg <player>", desc: "Message a player" },
               { cmd: "/vote", desc: "Vote for rewards" },
-              { cmd: "/kit", desc: "Get starter items" }, // Added extra commands for wider layout
+              { cmd: "/kit", desc: "Get starter items" },
               { cmd: "/ignore", desc: "Block a player" },
             ].map((command) => (
               <div 

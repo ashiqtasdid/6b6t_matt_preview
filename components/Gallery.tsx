@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react"; 
 import Image from "next/image";
 import {
@@ -23,6 +23,8 @@ interface GalleryImage {
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("all");
+  const [showAllMobile, setShowAllMobile] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const galleryImages: GalleryImage[] = [
     {
@@ -127,10 +129,26 @@ const Gallery = () => {
     { id: "raids", name: "Raids" },
   ];
 
+  // Check if we're on mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const filteredImages =
     activeFilter === "all"
       ? galleryImages
       : galleryImages.filter((img) => img.category === activeFilter);
+
+  // Limit to 6 images on mobile unless "show all" is clicked
+  const displayedImages = isMobile && !showAllMobile 
+    ? filteredImages.slice(0, 6) 
+    : filteredImages;
 
   const navigateImage = useCallback((direction: "next" | "prev") => {
     if (!selectedImage) return;
@@ -150,7 +168,7 @@ const Gallery = () => {
     setSelectedImage(filteredImages[newIndex]);
   }, [selectedImage, filteredImages]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!selectedImage) return;
 
@@ -185,7 +203,10 @@ const Gallery = () => {
           {categories.map((category) => (
             <motion.button
               key={category.id}
-              onClick={() => setActiveFilter(category.id)}
+              onClick={() => {
+                setActiveFilter(category.id);
+                setShowAllMobile(false); // Reset show all when changing filters
+              }}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
                 activeFilter === category.id
                   ? "bg-[#08CFF9] text-[#211F22]"
@@ -204,7 +225,7 @@ const Gallery = () => {
           layout
         >
           <AnimatePresence>
-            {filteredImages.map((image) => (
+            {displayedImages.map((image) => (
               <motion.div
                 key={image.id}
                 className="relative aspect-square overflow-hidden rounded-lg border border-slate-700 bg-slate-800/40 cursor-pointer group"
@@ -248,6 +269,21 @@ const Gallery = () => {
           >
             <FaImage className="mx-auto text-4xl text-slate-600 mb-3" />
             <p className="text-slate-400">No images found in this category.</p>
+          </motion.div>
+        )}
+
+        {isMobile && filteredImages.length > 6 && (
+          <motion.div 
+            className="w-full flex justify-center mt-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <button
+              onClick={() => setShowAllMobile(!showAllMobile)}
+              className="px-6 py-3 bg-[#08CFF9]/20 hover:bg-[#08CFF9]/30 text-[#08CFF9] rounded-md font-medium transition-all"
+            >
+              {showAllMobile ? 'Show Less' : `Show All (${filteredImages.length})`}
+            </button>
           </motion.div>
         )}
 

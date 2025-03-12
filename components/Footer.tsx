@@ -172,13 +172,13 @@ const Footer = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
             {[
               { cmd: "/tpa <player>", desc: "Teleport to a player" },
-              { cmd: "/home", desc: "Go to your home" },
-              { cmd: "/sethome", desc: "Set your home location" },
-              { cmd: "/spawn", desc: "Return to spawn" },
-              { cmd: "/msg <player>", desc: "Message a player" },
-              { cmd: "/vote", desc: "Vote for rewards" },
-              { cmd: "/kit", desc: "Get starter items" },
-              { cmd: "/ignore", desc: "Block a player" },
+              { cmd: "/home <name>", desc: "Teleport to your home" },
+              { cmd: "/sethome <name>", desc: "Create a home (requires a netherite block)" },
+              { cmd: "/msg <player>", desc: "Send a private message to a player" },
+              { cmd: "/ignore <player>", desc: "Stop seeing messages from a player" },
+              { cmd: "/skin", desc: "Change your skin" },
+              { cmd: "/balloons", desc: "Equip balloon cosmetics" },
+              { cmd: "/hotspot", desc: "Teleport to an active hotspot" },
             ].map((command) => (
               <div 
                 key={command.cmd} 

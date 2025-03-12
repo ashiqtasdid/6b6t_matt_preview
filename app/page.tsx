@@ -1,4 +1,5 @@
 import Faq from "@/components/FAQ";
+import ServerFeatures from "@/components/Features";
 import Footer from "@/components/Footer";
 import Gallery from "@/components/Gallery";
 import Hero from "@/components/Hero";
@@ -10,6 +11,7 @@ export default function Home() {
     <Nav/>
     <Hero/>
     <Gallery/>
+    <ServerFeatures/>
     <Faq/>
     <Footer/>
   </main>

@@ -12,7 +12,6 @@ import {
   FaHatWizard,
   FaBalanceScale,
   FaGlobe,
-  FaUserClock,
 } from "react-icons/fa";
 
 const ServerFeatures = () => {

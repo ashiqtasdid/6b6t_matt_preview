@@ -177,7 +177,7 @@ const Faq = () => {
           The best place to learn about the changes and new features on 6b6t is
           in the official{" "}
           <Link
-            href="https://discord.gg/6b6t"
+            href=" https://discord.6b6t.org/"
             className="text-[#08CFF9] hover:text-[#F7EB01] underline"
           >
             6b6t Discord

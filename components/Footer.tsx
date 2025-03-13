@@ -14,8 +14,8 @@ import {
   FaVoteYea,
   FaTerminal,
   FaChartBar,
-  FaSkull,
 } from "react-icons/fa";
+import Image from "next/image";
 
 interface BaseLink {
   name: string;
@@ -99,7 +99,7 @@ const Footer = () => {
           <div className="lg:col-span-3">
             <motion.div variants={itemVariants} className="flex items-center mb-4">
               <div className="h-10 w-10 bg-[#08CFF9] rounded-md flex items-center justify-center text-[#211F22] font-bold mr-3">
-                <FaSkull size={24} />
+                <Image src={'/assets/logo.png'} height={50} width={50} alt="logo"/>
               </div>
               <span className="text-2xl font-bold">
                 6b6t <span className="text-[#08CFF9]">Minecraft</span>

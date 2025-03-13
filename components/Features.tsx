@@ -59,36 +59,39 @@ const ServerFeatures = () => {
     {
       icon: <FaHome className="text-[#F7EB01]" />,
       title: "Essential Commands",
-      description: "Enjoy convenient access to essential commands like /tpa and /home while maintaining anarchy gameplay.",
+      description:
+        "Enjoy convenient access to essential commands like /tpa and /home while maintaining anarchy gameplay.",
       image: "/assets/images/4.png",
       details: [
         "/home - Set multiple home locations",
         "/tpa - Teleport to other players",
-        "/back - Return to previous location"
-      ]
+        "/back - Return to previous location",
+      ],
     },
     {
       icon: <FaRocket className="text-[#08CFF9]" />,
       title: "Latest Minecraft Version",
-      description: "We stay up-to-date with the newest Minecraft releases and frequently add exciting new features.",
+      description:
+        "We stay up-to-date with the newest Minecraft releases and frequently add exciting new features.",
       image: "/assets/images/7.png",
       details: [
         "Regular version updates",
         "Custom game mechanics",
-        "Community-requested features"
-      ]
+        "Community-requested features",
+      ],
     },
     {
       icon: <FaHatWizard className="text-[#F7EB01]" />,
       title: "Non P2W Cosmetics",
-      description: "Thank our supporters with fun cosmetic options like /balloons, /hat, colored names and custom prefixes.",
+      description:
+        "Thank our supporters with fun cosmetic options like /balloons, /hat, colored names and custom prefixes.",
       image: "/assets/images/9.png",
       details: [
         "Colored chat names",
         "Custom prefixes",
-        "Visual effects & cosmetics"
-      ]
-    }
+        "Visual effects & cosmetics",
+      ],
+    },
   ];
 
   const containerVariants = {
@@ -143,49 +146,6 @@ const ServerFeatures = () => {
           </motion.p>
         </motion.div>
 
-        {/* Main Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              className="bg-slate-800/30 border border-slate-700 rounded-lg overflow-hidden shadow-lg hover:border-[#08CFF9] transition-all"
-            >
-              <div className="h-48 relative">
-                <Image
-                  src={feature.image}
-                  alt={feature.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#211F22] via-transparent to-transparent"></div>
-              </div>
-              
-              <div className="p-6 relative">
-                <div className="absolute -top-10 left-6 bg-[#211F22] border-2 border-slate-700 p-3 rounded-lg">
-                  {feature.icon}
-                </div>
-                
-                <h3 className="text-xl font-bold text-white mt-3">{feature.title}</h3>
-                <p className="mt-2 text-slate-300 text-sm mb-4">{feature.description}</p>
-                
-                <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-slate-700">
-                  {feature.stats.map((stat, i) => (
-                    <div key={i} className="text-center">
-                      <div className="text-lg font-bold text-[#08CFF9]">{stat.value}</div>
-                      <div className="text-xs text-slate-400">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Gameplay Features Section */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -193,7 +153,10 @@ const ServerFeatures = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <motion.h3 variants={itemVariants} className="text-2xl font-bold text-white mb-8 text-center">
+          <motion.h3
+            variants={itemVariants}
+            className="text-2xl font-bold text-white mb-8 text-center"
+          >
             Game<span className="text-[#08CFF9]">play</span> Features
           </motion.h3>
 
@@ -255,7 +218,9 @@ const ServerFeatures = () => {
 
                 <div className="absolute top-4 left-4 bg-[#211F22]/80 backdrop-blur-sm px-3 py-1 rounded-full text-sm text-white border border-slate-700 flex items-center">
                   {gameplayFeatures[activeFeature].icon}
-                  <span className="ml-2">{gameplayFeatures[activeFeature].title}</span>
+                  <span className="ml-2">
+                    {gameplayFeatures[activeFeature].title}
+                  </span>
                 </div>
 
                 <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -265,27 +230,76 @@ const ServerFeatures = () => {
                       Feature Highlights
                     </h4>
                     <ul className="space-y-2">
-                      {gameplayFeatures[activeFeature].details.map((detail, i) => (
-                        <li key={i} className="flex items-center text-slate-300">
-                          <span className="h-1.5 w-1.5 bg-[#08CFF9] rounded-full mr-2"></span>
-                          {detail}
-                        </li>
-                      ))}
+                      {gameplayFeatures[activeFeature].details.map(
+                        (detail, i) => (
+                          <li
+                            key={i}
+                            className="flex items-center text-slate-300"
+                          >
+                            <span className="h-1.5 w-1.5 bg-[#08CFF9] rounded-full mr-2"></span>
+                            {detail}
+                          </li>
+                        )
+                      )}
                     </ul>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 flex justify-center">
-                <div className="bg-slate-800/40 border border-slate-700 rounded-lg px-4 py-2 inline-flex items-center">
-                  <span className="text-slate-300 text-sm">
-                    <span className="text-[#08CFF9] font-semibold">Fair gameplay</span> - No pay-to-win mechanics
-                  </span>
-                </div>
-              </div>
+             
             </motion.div>
           </div>
         </motion.div>
+
+        {/* Main Features */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              className="bg-slate-800/30 border border-slate-700 rounded-lg overflow-hidden shadow-lg hover:border-[#08CFF9] transition-all"
+            >
+              <div className="h-48 relative">
+                <Image
+                  src={feature.image}
+                  alt={feature.title}
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#211F22] via-transparent to-transparent"></div>
+              </div>
+
+              <div className="p-6 relative">
+                <div className="absolute -top-10 left-6 bg-[#211F22] border-2 border-slate-700 p-3 rounded-lg">
+                  {feature.icon}
+                </div>
+
+                <h3 className="text-xl font-bold text-white mt-3">
+                  {feature.title}
+                </h3>
+                <p className="mt-2 text-slate-300 text-sm mb-4">
+                  {feature.description}
+                </p>
+
+                <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-slate-700">
+                  {feature.stats.map((stat, i) => (
+                    <div key={i} className="text-center">
+                      <div className="text-lg font-bold text-[#08CFF9]">
+                        {stat.value}
+                      </div>
+                      <div className="text-xs text-slate-400">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Gameplay Features Section */}
       </div>
     </div>
   );

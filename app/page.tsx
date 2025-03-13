@@ -10,8 +10,8 @@ export default function Home() {
   <main>
     <Nav/>
     <Hero/>
-    <Gallery/>
     <ServerFeatures/>
+    <Gallery/>
     <Faq/>
     <Footer/>
   </main>

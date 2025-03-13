@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { motion } from "motion/react"; 
+import { motion, AnimatePresence } from "motion/react";
 import {
   FaDiscord,
   FaDownload,
@@ -9,12 +9,31 @@ import {
   FaArrowRight,
   FaSkull,
   FaFire,
+  FaTimes,
+  FaJava,
+  FaCopy,
+  FaExternalLinkAlt,
+  FaCheckCircle,
 } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
+
+export const version = "v1.19.2";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoplay, setIsAutoplay] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+
+  const showNotification = (message: string) => {
+    setToastMessage(message);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  };
 
   const previewImages = [
     "/assets/images/1.png",
@@ -93,6 +112,23 @@ const Hero = () => {
       <div className="absolute top-20 left-10 w-40 h-40 bg-[#08CFF9]/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 right-10 w-60 h-60 bg-[#F7EB01]/10 rounded-full blur-3xl"></div>
 
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-4 right-4 z-50 flex items-center bg-[#211F22] border border-slate-700 px-4 py-3 rounded-lg shadow-lg"
+          >
+            <div className="flex-shrink-0 text-[#08CFF9]">
+              <FaCheckCircle size={18} />
+            </div>
+            <div className="ml-3 text-white">{toastMessage}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
         <motion.div
           variants={containerVariants}
@@ -103,15 +139,15 @@ const Hero = () => {
           <div className="lg:col-span-5 space-y-8">
             <motion.div variants={itemVariants} className="space-y-2">
               <h2 className="text-[#08CFF9] font-semibold text-lg flex items-center">
-                <FaSkull className="mr-2 text-[#F7EB01]" /> 
                 ANARCHY SERVER
               </h2>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
                 6b6t <span className="text-[#08CFF9]">Minecraft</span>
               </h1>
               <p className="text-slate-300 mt-4 text-lg max-w-lg">
-                A true anarchy experience with no rules, no punishments, and no queue. 
-                Do whatever you want in a world supporting up to 1000 players simultaneously.
+                A true anarchy experience with no rules, no punishments, and no
+                queue. Do whatever you want in a world supporting up to 1000
+                players simultaneously.
               </p>
             </motion.div>
 
@@ -119,7 +155,10 @@ const Hero = () => {
               variants={itemVariants}
               className="flex flex-wrap gap-4"
             >
-              <button className="px-6 py-3 bg-[#08CFF9] hover:bg-[#F7EB01] text-[#211F22] font-medium rounded-md shadow-md hover:shadow-lg transition-all duration-300 flex items-center">
+              <button 
+                className="px-6 py-3 bg-[#08CFF9] hover:bg-[#F7EB01] text-[#211F22] font-medium rounded-md shadow-md hover:shadow-lg transition-all duration-300 flex items-center"
+                onClick={() => setIsModalOpen(true)}
+              >
                 <FaDownload className="mr-2" />
                 Play Now
               </button>
@@ -134,10 +173,12 @@ const Hero = () => {
               className="pt-4 border-t border-slate-800"
             >
               <div className="flex flex-col space-y-3">
-                <div className="flex items-center text-slate-300">
-                  <FaDiscord className="text-[#08CFF9] mr-2" />
-                  <span>Join our Discord community</span>
-                </div>
+                <Link href="https://discord.6b6t.org/">
+                  <div className="flex items-center text-slate-300">
+                    <FaDiscord className="text-[#08CFF9] mr-2" />
+                    <span>Join our Discord community</span>
+                  </div>
+                </Link>
                 <div className="flex flex-wrap gap-3">
                   <span className="px-3 py-1 bg-slate-800/40 rounded-full text-sm text-slate-300 flex items-center">
                     <span className="w-1.5 h-1.5 bg-[#08CFF9] rounded-full mr-1.5"></span>
@@ -268,7 +309,7 @@ const Hero = () => {
                         className="ml-2 text-xs bg-slate-800/40 hover:bg-slate-700/40 text-white px-2 py-1 rounded transition-colors"
                         onClick={() => {
                           navigator.clipboard.writeText("play.6b6t.org");
-                          alert("Server address copied to clipboard!");
+                          showNotification("Server address copied to clipboard!");
                         }}
                       >
                         Copy
@@ -277,14 +318,16 @@ const Hero = () => {
                   </div>
                   <div className="flex items-center">
                     <span className="h-2 w-2 rounded-full bg-[#08CFF9] mr-2 animate-pulse"></span>
-                    <span className="text-slate-300 text-sm">Online • No Queue</span>
+                    <span className="text-slate-300 text-sm">
+                      Online • No Queue
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="absolute -top-3 -right-3 bg-[#08CFF9] text-[#211F22] font-bold px-3 py-1 rounded-full text-sm shadow-lg border-2 border-slate-800 z-10">
-              v1.19.2
+              {version}
             </div>
 
             <div className="absolute top-12 -right-2 bg-[#F7EB01] text-[#211F22] font-bold px-3 py-1 rounded-md text-sm shadow-lg border-2 border-slate-800 z-10 transform rotate-12">
@@ -298,7 +341,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+          className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
@@ -306,6 +349,117 @@ const Hero = () => {
           <FaChevronDown className="text-[#08CFF9]" />
         </motion.div>
       </div>
+
+      {/* Play Now Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", bounce: 0.3 }}
+              className="bg-[#211F22] border-2 border-slate-700 rounded-xl w-full max-w-2xl shadow-2xl overflow-hidden"
+              /* eslint-disable  @typescript-eslint/no-explicit-any */
+              onClick={(e: { stopPropagation: () => any; }) => e.stopPropagation()}
+            >
+              <div className="flex justify-between items-center p-6 border-b border-slate-700">
+                <h3 className="text-2xl font-bold text-white flex items-center">
+                  <FaDownload className="mr-3 text-[#08CFF9]" />
+                  Join 6b6t Minecraft Server
+                </h3>
+                <button 
+                  onClick={() => setIsModalOpen(false)}
+                  className="text-slate-400 hover:text-white transition-colors"
+                  aria-label="Close modal"
+                >
+                  <FaTimes size={20} />
+                </button>
+              </div>
+              
+              <div className="p-6 space-y-6">
+                <div className="bg-slate-800/50 rounded-lg p-5 border border-slate-700">
+                  <h4 className="text-lg font-medium text-white mb-3">Step 1: Have Java Minecraft</h4>
+                  <p className="text-slate-300 mb-4">Make sure you have the Java Edition of Minecraft {version} installed.</p>
+                  <a 
+                    href="https://www.minecraft.net/en-us/download" 
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="flex items-center text-[#08CFF9] hover:text-[#F7EB01] transition-colors"
+                  >
+                    <FaJava className="mr-2" />
+                    Get Minecraft Java Edition
+                    <FaExternalLinkAlt className="ml-2 text-sm" />
+                  </a>
+                </div>
+                
+                <div className="bg-slate-800/50 rounded-lg p-5 border border-slate-700">
+                  <h4 className="text-lg font-medium text-white mb-3">Step 2: Connect to our server</h4>
+                  <div className="flex flex-col space-y-3">
+                    <div className="flex items-center">
+                      <div className="text-slate-300 mr-2 w-28">IP Address:</div>
+                      <div className="flex items-center">
+                        <code className="bg-slate-800/80 text-[#08CFF9] px-3 py-1 rounded font-mono">
+                          play.6b6t.org
+                        </code>
+                        <button
+                          className="ml-2 bg-slate-700/50 hover:bg-slate-700 text-white p-2 rounded transition-colors"
+                          onClick={() => {
+                            navigator.clipboard.writeText("play.6b6t.org");
+                            showNotification("Server address copied to clipboard!");
+                          }}
+                          aria-label="Copy server address"
+                        >
+                          <FaCopy size={14} />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="text-slate-300 mr-2 w-28">Version:</div>
+                      <code className="bg-slate-800/80 text-[#F7EB01] px-3 py-1 rounded font-mono">
+                        {version}
+                      </code>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-[#08CFF9]/10 border border-[#08CFF9]/30 rounded-lg p-4">
+                  <div className="flex">
+                    <div className="flex-shrink-0 pt-0.5">
+                      <div className="h-4 w-4 rounded-full bg-[#08CFF9] animate-pulse"></div>
+                    </div>
+                    <div className="ml-3">
+                      <h4 className="font-medium text-[#08CFF9]">Server is online</h4>
+                      <p className="text-slate-300 text-sm mt-1">
+                        Current players: 627/1000 • No queue • 99.8% uptime
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-slate-800/50 p-6 border-t border-slate-700 flex justify-between items-center">
+                <div className="text-slate-400 text-sm flex items-center">
+                  <FaSkull className="text-[#F7EB01] mr-2" />
+                  Remember: This is a true anarchy server
+                </div>
+                <button 
+                  className="px-5 py-2 bg-[#08CFF9] hover:bg-[#F7EB01] text-[#211F22] font-medium rounded-md shadow-md hover:shadow-lg transition-all duration-300"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Got it
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

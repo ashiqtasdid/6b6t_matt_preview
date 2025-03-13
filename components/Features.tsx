@@ -11,6 +11,8 @@ import {
   FaRocket,
   FaHatWizard,
   FaBalanceScale,
+  FaGlobe,
+  FaUserClock,
 } from "react-icons/fa";
 
 const ServerFeatures = () => {
@@ -23,11 +25,7 @@ const ServerFeatures = () => {
       description:
         "Join our thriving server with support for up to 1000 player slots, all running on premium hardware.",
       image: "/assets/images/1.png",
-      stats: [
-        { value: "1000", label: "Player Slots" },
-        { value: "24/7", label: "Uptime" },
-        { value: "Global", label: "Players" },
-      ],
+      stat: { value: "1000", label: "Player Slots", icon: <FaUsers /> }
     },
     {
       icon: <FaDiscord className="text-[#F7EB01]" />,
@@ -35,11 +33,7 @@ const ServerFeatures = () => {
       description:
         "Our dedicated admin team provides constant support through our active Discord community.",
       image: "/assets/images/6.png",
-      stats: [
-        { value: "10K+", label: "Discord Members" },
-        { value: "24/7", label: "Support" },
-        { value: "Active", label: "Staff Team" },
-      ],
+      stat: { value: "10K+", label: "Discord Members", icon: <FaDiscord /> }
     },
     {
       icon: <FaGamepad className="text-[#08CFF9]" />,
@@ -47,11 +41,7 @@ const ServerFeatures = () => {
       description:
         "Play on Java Edition, Bedrock Edition, or with cracked accounts - everyone is welcome on 6b6t.",
       image: "/assets/images/3.png",
-      stats: [
-        { value: "Java", label: "Edition" },
-        { value: "Bedrock", label: "Edition" },
-        { value: "Cracked", label: "Support" },
-      ],
+      stat: { value: "Global", label: "Player Base", icon: <FaGlobe /> }
     },
   ];
 
@@ -245,8 +235,6 @@ const ServerFeatures = () => {
                   </div>
                 </div>
               </div>
-
-             
             </motion.div>
           </div>
         </motion.div>
@@ -284,22 +272,25 @@ const ServerFeatures = () => {
                   {feature.description}
                 </p>
 
-                <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-slate-700">
-                  {feature.stats.map((stat, i) => (
-                    <div key={i} className="text-center">
-                      <div className="text-lg font-bold text-[#08CFF9]">
-                        {stat.value}
-                      </div>
-                      <div className="text-xs text-slate-400">{stat.label}</div>
+                <div className="mt-4 pt-4 border-t border-slate-700">
+                  <div className="flex items-center justify-center space-x-3">
+                    <div className="p-2 bg-slate-800/50 rounded-full text-[#08CFF9]">
+                      {feature.stat.icon}
                     </div>
-                  ))}
+                    <div>
+                      <div className="text-xl font-bold text-[#08CFF9]">
+                        {feature.stat.value}
+                      </div>
+                      <div className="text-xs text-slate-400">
+                        {feature.stat.label}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
-
-        {/* Gameplay Features Section */}
       </div>
     </div>
   );

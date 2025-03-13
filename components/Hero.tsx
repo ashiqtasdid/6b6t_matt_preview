@@ -385,8 +385,8 @@ const Hero = () => {
               
               <div className="p-6 space-y-6">
                 <div className="bg-slate-800/50 rounded-lg p-5 border border-slate-700">
-                  <h4 className="text-lg font-medium text-white mb-3">Step 1: Have Java Minecraft</h4>
-                  <p className="text-slate-300 mb-4">Make sure you have the Java Edition of Minecraft {version} installed.</p>
+                  <h4 className="text-lg font-medium text-white mb-3">Step 1: Have Minecraft</h4>
+                  <p className="text-slate-300 mb-4">Make sure you have the Java Or Bedrock Edition of Minecraft {version} installed.</p>
                   <a 
                     href="https://www.minecraft.net/en-us/download" 
                     target="_blank"
@@ -394,7 +394,7 @@ const Hero = () => {
                     className="flex items-center text-[#08CFF9] hover:text-[#F7EB01] transition-colors"
                   >
                     <FaJava className="mr-2" />
-                    Get Minecraft Java Edition
+                    Get Minecraft Java & Bedrock Edition
                     <FaExternalLinkAlt className="ml-2 text-sm" />
                   </a>
                 </div>

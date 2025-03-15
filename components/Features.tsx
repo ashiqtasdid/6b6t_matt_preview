@@ -239,7 +239,7 @@ const ServerFeatures = () => {
         </motion.div>
 
         {/* Main Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <div className="grid pt-20 grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {features.map((feature, index) => (
             <motion.div
               key={index}

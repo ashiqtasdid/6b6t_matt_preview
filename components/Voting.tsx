@@ -154,29 +154,35 @@ const VoteSection = () => {
 
         {/* Tabs navigation */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex bg-slate-800/40 rounded-lg p-1">
-            <button
-              onClick={() => setActiveTab("voting")}
-              className={`px-4 py-2 rounded-md text-sm font-medium ${
-                activeTab === "voting"
-                  ? "bg-[#08CFF9] text-[#211F22]"
-                  : "text-white hover:bg-slate-700/40"
-              } transition-colors`}
-            >
-              <FaVoteYea className="inline mr-2" /> Voting Sites
-            </button>
-            <button
-              onClick={() => setActiveTab("rewards")}
-              className={`px-4 py-2 rounded-md text-sm font-medium ${
-                activeTab === "rewards"
-                  ? "bg-[#F7EB01] text-[#211F22]"
-                  : "text-white hover:bg-slate-700/40"
-              } transition-colors ml-1`}
-            >
-              <FaGift className="inline mr-2" /> Reward Tiers
-            </button>
-          </div>
-        </div>
+  <div className="inline-flex bg-slate-800/40 rounded-lg p-1">
+    <button
+      onClick={() => setActiveTab("voting")}
+      className={`px-4 py-2 rounded-md text-sm font-medium ${
+        activeTab === "voting"
+          ? "bg-[#08CFF9] text-[#211F22]"
+          : "text-white hover:bg-slate-700/40"
+      } transition-colors`}
+    >
+      <FaVoteYea className="inline mr-2" /> Voting Sites
+    </button>
+    <button
+      onClick={() => setActiveTab("rewards")}
+      className={`px-5 py-2 rounded-md text-sm font-medium relative ${
+        activeTab === "rewards"
+          ? "bg-[#F7EB01] text-[#211F22] shadow-lg shadow-[#F7EB01]/20"
+          : "bg-gradient-to-r from-[#F7EB01]/20 to-[#F7EB01]/40 text-white hover:from-[#F7EB01]/30 hover:to-[#F7EB01]/50 border border-[#F7EB01]/30"
+      } transition-all ml-1`}
+    >
+      <FaGift className="inline mr-2" /> Reward Tiers
+      {activeTab !== "rewards" && (
+        <span className="absolute -top-1 -right-1 flex h-3 w-3">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F7EB01] opacity-40"></span>
+          <span className="relative inline-flex rounded-full h-3 w-3 bg-[#F7EB01]"></span>
+        </span>
+      )}
+    </button>
+  </div>
+</div>
 
         {/* Voting Sites Tab */}
         {activeTab === "voting" && (

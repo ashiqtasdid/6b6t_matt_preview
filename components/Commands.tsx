@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FaSearch, FaStar, FaLock } from "react-icons/fa";
 import { motion, AnimatePresence } from "motion/react";
 
-type RankType = "Free" | "Prime" | "Ultra" | "Elite" | "Apex";
+type RankType = "Free" | "Prime" | "Prime Ultra" | "Elite" | "Apex";
 
 interface CommandType {
   name: string;
@@ -176,7 +176,7 @@ const Commands = () => {
       name: "/buildermode",
       description: "Increase your view distance temporarily for building.",
       example: "/buildermode",
-      ranks: ["Prime", "Ultra", "Elite", "Apex"]
+      ranks: [ "Prime Ultra", "Elite", "Apex"]
     },
     {
       name: "/stats",
@@ -188,13 +188,13 @@ const Commands = () => {
       name: "/balloons",
       description: "Put a cosmetic balloon in your hand.",
       example: "/balloons",
-      ranks: ["Prime", "Ultra", "Elite", "Apex"]
+      ranks: ["Prime", "Prime Ultra", "Elite", "Apex"]
     },
     {
       name: "/sit",
       description: "Sit on any block to rest.",
       example: "/sit",
-      ranks: ["Prime", "Ultra", "Elite", "Apex"]
+      ranks: ["Prime", "Prime Ultra", "Elite", "Apex"]
     },
     {
       name: "/skin",
@@ -289,7 +289,7 @@ const Commands = () => {
               bgColor = "bg-blue-700/30";
               textColor = "text-blue-300";
               break;
-            case "Ultra":
+            case "Prime Ultra":
               bgColor = "bg-purple-700/30";
               textColor = "text-purple-300";
               break;

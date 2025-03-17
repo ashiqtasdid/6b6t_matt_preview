@@ -14,12 +14,14 @@ import {
   FaDownload,
 } from "react-icons/fa";
 import Image from "next/image";
+import { useModalStore } from './hooks/useModal';
 
 const Nav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
   const [isPlayerCountHovered, setIsPlayerCountHovered] = useState(false);
+  const { openModal } = useModalStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -193,6 +195,7 @@ const Nav = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={openModal}
                 className="ml-2 px-4 py-1.5 bg-[#08CFF9] text-[#211F22] text-sm font-medium rounded-md hover:bg-[#F7EB01] shadow-sm hover:shadow transition-all duration-300 flex items-center"
               >
                 <FaDownload className="mr-2 text-xs" />

@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-import { FaSearch, FaChevronDown, FaStar, FaLock } from "react-icons/fa";
+import { FaSearch, FaStar, FaLock } from "react-icons/fa";
 import { motion, AnimatePresence } from "motion/react";
 
 type RankType = "Free" | "Prime" | "Ultra" | "Elite" | "Apex";
@@ -14,7 +14,6 @@ interface CommandType {
 
 const Commands = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const commands: CommandType[] = [
     {
@@ -246,8 +245,6 @@ const Commands = () => {
     command.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const displayedCommands = isExpanded ? filteredCommands : filteredCommands.slice(0, 12);
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -369,21 +366,21 @@ const Commands = () => {
         >
           <div className="grid grid-cols-12 text-slate-300 px-6 py-4 font-medium border-b border-slate-700 bg-slate-800/40">
             <div className="col-span-3 md:col-span-2">Command</div>
-            <div className="col-span-6 md:col-span-5">Description</div>
+            <div className="col-span-5 md:col-span-5">Description</div>
             <div className="hidden md:block md:col-span-3">Example</div>
-            <div className="col-span-3 md:col-span-2 text-right">Rank</div>
+            <div className="col-span-4 md:col-span-2 text-right">Rank</div>
           </div>
           
           <AnimatePresence mode="wait">
             <motion.div 
-              key={searchTerm + isExpanded.toString()}
+              key={searchTerm}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="divide-y divide-slate-700/70"
             >
-              {displayedCommands.length > 0 ? (
-                displayedCommands.map((command, index) => (
+              {filteredCommands.length > 0 ? (
+                filteredCommands.map((command, index) => (
                   <motion.div 
                     key={index} 
                     custom={index}
@@ -417,29 +414,6 @@ const Commands = () => {
               )}
             </motion.div>
           </AnimatePresence>
-          
-          {filteredCommands.length > 12 && (
-            <motion.div 
-              className="border-t border-slate-700 px-6 py-3 flex justify-center"
-              variants={itemVariants}
-            >
-              <motion.button 
-                className="flex items-center text-[#08CFF9] hover:text-[#F7EB01] transition-colors"
-                onClick={() => setIsExpanded(!isExpanded)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {isExpanded ? "Show Less" : "Show All Commands"}
-                <motion.div
-                  animate={{ rotate: isExpanded ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="ml-2"
-                >
-                  <FaChevronDown />
-                </motion.div>
-              </motion.button>
-            </motion.div>
-          )}
         </motion.div>
 
         <motion.div 

@@ -17,15 +17,17 @@ import {
 } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import { useModalStore } from './hooks/useModal';
 
 export const version = "v1.19.2";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoplay, setIsAutoplay] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+
+  const { isOpen: isModalOpen, setModalOpen } = useModalStore();
 
   const showNotification = (message: string) => {
     setToastMessage(message);
@@ -155,9 +157,9 @@ const Hero = () => {
               variants={itemVariants}
               className="flex flex-wrap gap-4"
             >
-              <button 
+              <button
                 className="px-6 py-3 bg-[#08CFF9] hover:bg-[#F7EB01] text-[#211F22] font-medium rounded-md shadow-md hover:shadow-lg transition-all duration-300 flex items-center"
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => setModalOpen(true)}
               >
                 <FaDownload className="mr-2" />
                 Play Now
@@ -309,7 +311,9 @@ const Hero = () => {
                         className="ml-2 text-xs bg-slate-800/40 hover:bg-slate-700/40 text-white px-2 py-1 rounded transition-colors"
                         onClick={() => {
                           navigator.clipboard.writeText("play.6b6t.org");
-                          showNotification("Server address copied to clipboard!");
+                          showNotification(
+                            "Server address copied to clipboard!"
+                          );
                         }}
                       >
                         Copy
@@ -353,44 +357,51 @@ const Hero = () => {
       {/* Play Now Modal */}
       <AnimatePresence>
         {isModalOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
-            onClick={() => setIsModalOpen(false)}
+            onClick={() => setModalOpen(false)}
           >
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", bounce: 0.3 }}
               className="bg-[#211F22] border-2 border-slate-700 rounded-xl w-full max-w-2xl shadow-2xl overflow-hidden"
               /* eslint-disable  @typescript-eslint/no-explicit-any */
-              onClick={(e: { stopPropagation: () => any; }) => e.stopPropagation()}
+              onClick={(e: { stopPropagation: () => any }) =>
+                e.stopPropagation()
+              }
             >
               <div className="flex justify-between items-center p-6 border-b border-slate-700">
                 <h3 className="text-2xl font-bold text-white flex items-center">
                   <FaDownload className="mr-3 text-[#08CFF9]" />
                   Join 6b6t Minecraft Server
                 </h3>
-                <button 
-                  onClick={() => setIsModalOpen(false)}
+                <button
+                  onClick={() => setModalOpen(false)}
                   className="text-slate-400 hover:text-white transition-colors"
                   aria-label="Close modal"
                 >
                   <FaTimes size={20} />
                 </button>
               </div>
-              
+
               <div className="p-6 space-y-6">
                 <div className="bg-slate-800/50 rounded-lg p-5 border border-slate-700">
-                  <h4 className="text-lg font-medium text-white mb-3">Step 1: Have Minecraft</h4>
-                  <p className="text-slate-300 mb-4">Make sure you have the Java Or Bedrock Edition of Minecraft {version} installed.</p>
-                  <a 
-                    href="https://www.minecraft.net/en-us/download" 
+                  <h4 className="text-lg font-medium text-white mb-3">
+                    Step 1: Have Minecraft
+                  </h4>
+                  <p className="text-slate-300 mb-4">
+                    Make sure you have the Java Or Bedrock Edition of Minecraft{" "}
+                    {version} installed.
+                  </p>
+                  <a
+                    href="https://www.minecraft.net/en-us/download"
                     target="_blank"
-                    rel="noopener noreferrer" 
+                    rel="noopener noreferrer"
                     className="flex items-center text-[#08CFF9] hover:text-[#F7EB01] transition-colors"
                   >
                     <FaJava className="mr-2" />
@@ -398,12 +409,16 @@ const Hero = () => {
                     <FaExternalLinkAlt className="ml-2 text-sm" />
                   </a>
                 </div>
-                
+
                 <div className="bg-slate-800/50 rounded-lg p-5 border border-slate-700">
-                  <h4 className="text-lg font-medium text-white mb-3">Step 2: Connect to our server</h4>
+                  <h4 className="text-lg font-medium text-white mb-3">
+                    Step 2: Connect to our server
+                  </h4>
                   <div className="flex flex-col space-y-3">
                     <div className="flex items-center">
-                      <div className="text-slate-300 mr-2 w-28">IP Address:</div>
+                      <div className="text-slate-300 mr-2 w-28">
+                        IP Address:
+                      </div>
                       <div className="flex items-center">
                         <code className="bg-slate-800/80 text-[#08CFF9] px-3 py-1 rounded font-mono">
                           play.6b6t.org
@@ -412,7 +427,9 @@ const Hero = () => {
                           className="ml-2 bg-slate-700/50 hover:bg-slate-700 text-white p-2 rounded transition-colors"
                           onClick={() => {
                             navigator.clipboard.writeText("play.6b6t.org");
-                            showNotification("Server address copied to clipboard!");
+                            showNotification(
+                              "Server address copied to clipboard!"
+                            );
                           }}
                           aria-label="Copy server address"
                         >
@@ -428,14 +445,51 @@ const Hero = () => {
                     </div>
                   </div>
                 </div>
-                
+                <div className="bg-slate-800/50 rounded-lg p-5 border border-slate-700">
+                  <h4 className="text-lg font-medium text-white mb-3">
+                    Step 2: Connect to our server
+                  </h4>
+                  <div className="flex flex-col space-y-3">
+                    <div className="flex items-center">
+                      <div className="text-slate-300 mr-2 w-28">
+                        IP Address:
+                      </div>
+                      <div className="flex items-center">
+                        <code className="bg-slate-800/80 text-[#08CFF9] px-3 py-1 rounded font-mono">
+                          bedrock.6b6t.org
+                        </code>
+                        <button
+                          className="ml-2 bg-slate-700/50 hover:bg-slate-700 text-white p-2 rounded transition-colors"
+                          onClick={() => {
+                            navigator.clipboard.writeText("play.6b6t.org");
+                            showNotification(
+                              "Server address copied to clipboard!"
+                            );
+                          }}
+                          aria-label="Copy server address"
+                        >
+                          <FaCopy size={14} />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="text-slate-300 mr-2 w-28">Port:</div>
+                      <code className="bg-slate-800/80 text-[#F7EB01] px-3 py-1 rounded font-mono">
+                        19132
+                      </code>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="bg-[#08CFF9]/10 border border-[#08CFF9]/30 rounded-lg p-4">
                   <div className="flex">
                     <div className="flex-shrink-0 pt-0.5">
                       <div className="h-4 w-4 rounded-full bg-[#08CFF9] animate-pulse"></div>
                     </div>
                     <div className="ml-3">
-                      <h4 className="font-medium text-[#08CFF9]">Server is online</h4>
+                      <h4 className="font-medium text-[#08CFF9]">
+                        Server is online
+                      </h4>
                       <p className="text-slate-300 text-sm mt-1">
                         Current players: 627/1000 • No queue • 99.8% uptime
                       </p>
@@ -443,15 +497,15 @@ const Hero = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-slate-800/50 p-6 border-t border-slate-700 flex justify-between items-center">
                 <div className="text-slate-400 text-sm flex items-center">
                   <FaSkull className="text-[#F7EB01] mr-2" />
                   Remember: This is a true anarchy server
                 </div>
-                <button 
+                <button
                   className="px-5 py-2 bg-[#08CFF9] hover:bg-[#F7EB01] text-[#211F22] font-medium rounded-md shadow-md hover:shadow-lg transition-all duration-300"
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={() => setModalOpen(false)}
                 >
                   Got it
                 </button>

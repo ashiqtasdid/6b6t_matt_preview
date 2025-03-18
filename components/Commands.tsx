@@ -1,9 +1,9 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import { FaSearch, FaStar, FaLock } from "react-icons/fa";
 import { motion, AnimatePresence } from "motion/react";
 
-type RankType = "Free" | "Prime" | "Prime Ultra" | "Elite" | "Apex";
+type RankType = "Free" | "Prime Ultra" | "Elite" | "Apex";
 
 interface CommandType {
   name: string;
@@ -14,235 +14,247 @@ interface CommandType {
 
 const Commands = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [expandedRows, setExpandedRows] = useState<number[]>([]);
+
+  const toggleRowExpansion = (index: number) => {
+    setExpandedRows((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    );
+  };
 
   const commands: CommandType[] = [
     {
       name: "/msg, /whisper, /w",
       description: "Send a private message to any online player",
       example: "/msg Pistonmaster How are you?",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/reply, /r",
-      description: "Send a private message to the last person who sent you a private message",
+      description:
+        "Send a private message to the last person who sent you a private message",
       example: "/reply Amazing",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/last, /l",
-      description: "Send a private message to the last person you sent a message to. Otherwise has /reply behaviour.",
+      description:
+        "Send a private message to the last person you sent a message to. Otherwise has /reply behaviour.",
       example: "/last That's cool",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/kill, /suicide",
       description: "Kills you in-game if you are alive.",
       example: "/kill",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/ignore",
-      description: "Ignores/blocks another player permanently. (Hides their messages in chat)",
+      description:
+        "Ignores/blocks another player permanently. (Hides their messages in chat)",
       example: "/ignore qbasty",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/ignorelist",
       description: "Get a list of everyone who you ignored.",
       example: "/ignorelist",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/pvpmode",
       description: "Show/hide messages that you get into PvP mode.",
       example: "/pvpmode",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/togglewhispering",
       description: "Show/hide all private messages from chat.",
       example: "/togglewhispering",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/togglechat",
       description: "Show/hide all global messages from chat.",
       example: "/togglechat",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/groupchat, /gc",
       description: "Talk privately in a groupchat with multiple people.",
       example: "/groupchat help",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/connectionmsgs",
       description: "Show/hide chat messages of people joining the server.",
       example: "/connectionmsgs",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/connectionmsgs color",
       description: "Change the color of connection messages in your chat.",
       example: "/connectionmsgs color",
-      ranks: ["Prime", "Elite", "Apex"]
+      ranks: ["Elite", "Apex"],
     },
     {
       name: "/deathmsgs",
       description: "Show/hide chat messages of people dying.",
       example: "/deathmsgs",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/deathmsgs color",
       description: "Change the color of death messages in your chat.",
       example: "/deathmsgs color",
-      ranks: ["Prime", "Elite", "Apex"]
+      ranks: ["Elite", "Apex"],
     },
     {
       name: "/sethome",
       description: "Creates a new home at your current location.",
       example: "/sethome base",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/home",
       description: "Teleport to a home.",
       example: "/home base",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/homes, /homelist",
       description: "Lists all your homes.",
       example: "/homes",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/delhome",
       description: "Deletes a home.",
       example: "/delhome base",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/tpa",
       description: "Request to teleport to another player.",
       example: "/tpa rajrajrajrajraj",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/tptoggle, /tpt",
       description: "Hides teleport requests from all players.",
       example: "/tptoggle",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/tpy",
       description: "Accept a tpa request.",
       example: "/tpy rajrajrajrajraj",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/tpn",
       description: "Decline a tpa request.",
       example: "/tpn rajrajrajrajraj",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/tps",
       description: "Show info about server performance.",
       example: "/tps",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/hat",
       description: "Wear a hat on your head.",
       example: "/hat",
-      ranks: ["Prime", "Elite", "Apex"]
+      ranks: ["Elite", "Apex"],
     },
     {
       name: "/hotspot",
       description: "Teleport to the global hostspot.",
       example: "/hotspot",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/hotspot create",
       description: "Create a new hotspot at your current location.",
       example: "/hotspot create",
-      ranks: ["Elite", "Apex"]
+      ranks: ["Elite", "Apex"],
     },
     {
       name: "/buildermode",
       description: "Increase your view distance temporarily for building.",
       example: "/buildermode",
-      ranks: [ "Prime Ultra", "Elite", "Apex"]
+      ranks: ["Prime Ultra", "Elite", "Apex"],
     },
     {
       name: "/stats",
       description: "Get a link to the 6b6t stats webpage.",
       example: "/stats",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/balloons",
       description: "Put a cosmetic balloon in your hand.",
       example: "/balloons",
-      ranks: ["Prime", "Prime Ultra", "Elite", "Apex"]
+      ranks: ["Prime Ultra", "Elite", "Apex"],
     },
     {
       name: "/sit",
       description: "Sit on any block to rest.",
       example: "/sit",
-      ranks: ["Prime", "Prime Ultra", "Elite", "Apex"]
+      ranks: ["Prime Ultra", "Elite", "Apex"],
     },
     {
       name: "/skin",
-      description: "Change your in-game skin to any Minecraft players skin or use an URL.",
+      description:
+        "Change your in-game skin to any Minecraft players skin or use an URL.",
       example: "/skin Pistonmaster",
-      ranks: ["Prime", "Elite", "Apex"]
+      ranks: ["Elite", "Apex"],
     },
     {
       name: "/freecam",
       description: "Vanilla hacking",
       example: "/freecam",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/shop, /buy",
       description: "Get a link to the official 6b6t Shop.",
       example: "/shop",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/vote",
       description: "Shows the vote count and instructions to vote.",
       example: "/vote",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/discord",
       description: "Get a invite to the 6b6t Discord Server.",
       example: "/discord",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/website",
       description: "Get a link to the 6b6t Website.",
       example: "/website",
-      ranks: ["Free"]
+      ranks: ["Free"],
     },
     {
       name: "/help",
       description: "Get a link to the this webpage.",
       example: "/help",
-      ranks: ["Free"]
-    }
+      ranks: ["Free"],
+    },
   ];
 
-  const filteredCommands = commands.filter(command =>
-    command.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    command.description.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCommands = commands.filter(
+    (command) =>
+      command.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      command.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const containerVariants = {
@@ -264,31 +276,34 @@ const Commands = () => {
   const tableRowVariants = {
     hidden: { opacity: 0, y: 10 },
     visible: (i: number) => ({
-      opacity: 1, 
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         delay: 0.05 * i,
         duration: 0.3,
-      }
+      },
     }),
   };
 
   const renderRankBadges = (ranks: RankType[]) => {
     if (ranks.includes("Free")) {
-      return <span className="bg-slate-700/60 text-xs px-2 py-0.5 rounded-full text-slate-300">Free</span>;
+      return (
+        <div className="flex justify-start w-full"> {/* Added container with justify-start */}
+          <span className="bg-slate-700/60 text-xs px-2 py-0.5 rounded-full text-slate-300">
+            Free
+          </span>
+        </div>
+      );
     }
-
     return (
-      <div className="flex flex-wrap gap-1">
-        {ranks.map(rank => {
+      <div className="flex flex-wrap gap-1 justify-start w-full">
+        {" "}
+        {/* Added justify-start */}
+        {ranks.map((rank) => {
           let bgColor = "";
           let textColor = "";
 
           switch (rank) {
-            case "Prime":
-              bgColor = "bg-blue-700/30";
-              textColor = "text-blue-300";
-              break;
             case "Prime Ultra":
               bgColor = "bg-purple-700/30";
               textColor = "text-purple-300";
@@ -307,8 +322,8 @@ const Commands = () => {
           }
 
           return (
-            <span 
-              key={rank} 
+            <span
+              key={rank}
               className={`${bgColor} ${textColor} text-xs px-2 py-0.5 rounded-full flex items-center`}
             >
               <FaStar className="mr-1 text-[0.6rem]" /> {rank}
@@ -324,28 +339,27 @@ const Commands = () => {
       <div className="absolute top-40 left-20 w-60 h-60 bg-[#F7EB01]/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 right-20 w-80 h-80 bg-[#08CFF9]/10 rounded-full blur-3xl"></div>
 
-      <motion.div 
+      <motion.div
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <motion.div 
-          className="text-center mb-12"
-          variants={itemVariants}
-        >
-          <h2 className="text-[#08CFF9] text-lg font-semibold mb-3">COMMANDS LIST</h2>
-          <h3 className="text-4xl font-bold text-white mb-6">Available Server Commands</h3>
+        <motion.div className="text-center mb-12" variants={itemVariants}>
+          <h2 className="text-[#08CFF9] text-lg font-semibold mb-3">
+            COMMANDS LIST
+          </h2>
+          <h3 className="text-4xl font-bold text-white mb-6">
+            Available Server Commands
+          </h3>
           <p className="text-slate-300 max-w-3xl mx-auto">
-            Use these commands to enhance your anarchy experience. Some commands require a premium rank to use.
-            Check out our shop to upgrade your experience.
+            Use these commands to enhance your anarchy experience. Some commands
+            require a premium rank to use. Check out our shop to upgrade your
+            experience.
           </p>
         </motion.div>
 
-        <motion.div 
-          className="mb-8"
-          variants={itemVariants}
-        >
+        <motion.div className="mb-8" variants={itemVariants}>
           <div className="relative max-w-md mx-auto">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <FaSearch className="text-slate-400" />
@@ -360,7 +374,7 @@ const Commands = () => {
           </div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="bg-slate-800/20 border border-slate-700 rounded-xl overflow-hidden shadow-lg"
           variants={itemVariants}
         >
@@ -368,11 +382,12 @@ const Commands = () => {
             <div className="col-span-3 md:col-span-2">Command</div>
             <div className="col-span-5 md:col-span-5">Description</div>
             <div className="hidden md:block md:col-span-3">Example</div>
-            <div className="col-span-4 md:col-span-2 text-right">Rank</div>
+            <div className="col-span-4 md:col-span-2">Rank</div>{" "}
+            {/* Removed text-right */}
           </div>
-          
+
           <AnimatePresence mode="wait">
-            <motion.div 
+            <motion.div
               key={searchTerm}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -381,30 +396,65 @@ const Commands = () => {
             >
               {filteredCommands.length > 0 ? (
                 filteredCommands.map((command, index) => (
-                  <motion.div 
-                    key={index} 
+                  <motion.div
+                    key={index}
                     custom={index}
                     variants={tableRowVariants}
                     initial="hidden"
                     animate="visible"
-                    className="grid grid-cols-12 px-6 py-4 hover:bg-slate-800/20 transition-colors"
+                    className="group"
                   >
-                    <div className="col-span-3 md:col-span-2 font-mono text-[#08CFF9] truncate pr-2">
-                      {command.name}
+                    <div
+                      className="grid grid-cols-12 px-6 py-4 hover:bg-slate-800/20 transition-colors cursor-pointer md:cursor-default"
+                      onClick={() => toggleRowExpansion(index)}
+                    >
+                      <div className="col-span-6 md:col-span-2 font-mono text-[#08CFF9] truncate pr-2">
+                        {command.name}
+                      </div>
+                      <div className="hidden md:block md:col-span-5 text-slate-300 truncate pr-2">
+                        {command.description}
+                      </div>
+                      <div className="hidden md:block md:col-span-3 text-slate-400 font-mono text-sm truncate pr-2">
+                        {command.example}
+                      </div>
+                      <div className="col-span-6 md:col-span-2 flex justify-start items-center">
+                        {" "}
+                        {/* Changed justify-end to justify-start */}
+                        {renderRankBadges(command.ranks)}
+                      </div>
                     </div>
-                    <div className="col-span-5 md:col-span-5 text-slate-300 truncate pr-2">
-                      {command.description}
-                    </div>
-                    <div className="hidden md:block md:col-span-3 text-slate-400 font-mono text-sm truncate pr-2">
-                      {command.example}
-                    </div>
-                    <div className="col-span-4 md:col-span-2 flex justify-end items-center">
-                      {renderRankBadges(command.ranks)}
-                    </div>
+
+                    {/* Mobile expanded view */}
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{
+                        height: expandedRows.includes(index) ? "auto" : 0,
+                        opacity: expandedRows.includes(index) ? 1 : 0,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="md:hidden overflow-hidden bg-slate-800/10 px-6"
+                    >
+                      <div className="py-4 space-y-2 border-t border-slate-700/50">
+                        <div>
+                          <div className="text-slate-400 text-sm">
+                            Description:
+                          </div>
+                          <div className="text-slate-300">
+                            {command.description}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-slate-400 text-sm">Example:</div>
+                          <div className="text-slate-300 font-mono text-sm">
+                            {command.example}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
                   </motion.div>
                 ))
               ) : (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   className="text-center py-8 text-slate-400"
@@ -416,13 +466,17 @@ const Commands = () => {
           </AnimatePresence>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="mt-12 flex justify-center"
           variants={itemVariants}
         >
-          <motion.div 
+          <motion.div
             className="bg-gradient-to-r from-[#08CFF9]/20 to-[#F7EB01]/20 border border-slate-700 rounded-lg p-6 max-w-2xl"
-            whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" }}
+            whileHover={{
+              scale: 1.02,
+              boxShadow:
+                "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
+            }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <div className="flex items-start">
@@ -430,14 +484,16 @@ const Commands = () => {
                 <FaLock className="text-[#F7EB01]" />
               </div>
               <div className="ml-4">
-                <h4 className="text-white font-medium mb-2">Premium Commands</h4>
+                <h4 className="text-white font-medium mb-2">
+                  Premium Commands
+                </h4>
                 <p className="text-slate-300 text-sm mb-4">
-                  Gain access to exclusive commands by upgrading to a premium rank. 
-                  Premium ranks also include other benefits like increased homes, colored name tags, 
-                  and custom join messages.
+                  Gain access to exclusive commands by upgrading to a premium
+                  rank. Premium ranks also include other benefits like increased
+                  homes, colored name tags, and custom join messages.
                 </p>
-                <motion.a 
-                  href="/shop" 
+                <motion.a
+                  href="/shop"
                   className="inline-flex items-center bg-[#08CFF9] hover:bg-[#F7EB01] text-[#211F22] font-medium px-4 py-2 rounded transition-colors"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

@@ -19,7 +19,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useModalStore } from './hooks/useModal';
 
-export const version = "v1.19.2";
+export const version = "v1.21.1";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

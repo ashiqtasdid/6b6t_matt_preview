@@ -6,6 +6,8 @@ import {
   FaGift,
   FaTrophy,
   FaInfoCircle,
+  FaChevronDown,
+  FaChevronUp
 } from "react-icons/fa";
 
 interface EventProgressBarProps {
@@ -22,7 +24,9 @@ interface EventProgressBarProps {
     threshold: number;
     name: string;
     description: string;
+    details?: string;
   }>;
+  expandableRewards?: boolean;
   className?: string;
   accentColor?: string;
   secondaryColor?: string;
@@ -39,6 +43,7 @@ const EventProgressBar: React.FC<EventProgressBarProps> = ({
   targetValue,
   unit = "",
   rewards = [],
+  expandableRewards = false,
   className = "",
   accentColor = "#08CFF9",
   secondaryColor = "#F7EB01",
@@ -51,6 +56,7 @@ const EventProgressBar: React.FC<EventProgressBarProps> = ({
   }>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   const [isExpanded, setIsExpanded] = useState(false);
+  const [expandedRewardIndex, setExpandedRewardIndex] = useState<number | null>(null);
   const [progressPercentage, setProgressPercentage] = useState(0);
 
   useEffect(() => {
@@ -84,6 +90,13 @@ const EventProgressBar: React.FC<EventProgressBarProps> = ({
 
     return () => clearInterval(timer);
   }, [currentValue, targetValue, endDate]);
+
+  // Toggle reward details
+  const toggleRewardDetails = (index: number, event: React.MouseEvent) => {
+    if (!expandableRewards) return;
+    event.stopPropagation();
+    setExpandedRewardIndex(expandedRewardIndex === index ? null : index);
+  };
 
   // Find the next reward
   const nextReward = rewards.find((reward) => reward.threshold > currentValue);
@@ -175,7 +188,6 @@ const EventProgressBar: React.FC<EventProgressBarProps> = ({
         </div>
 
         <div className="flex justify-between items-center text-sm">
-          
           <div className="text-white font-medium">
             {progressPercentage}% Complete
           </div>
@@ -248,7 +260,10 @@ const EventProgressBar: React.FC<EventProgressBarProps> = ({
                           : "border-slate-700 bg-slate-800/30"
                       }`}
                     >
-                      <div className="flex justify-between items-start">
+                      <div 
+                        className={`flex justify-between items-start ${expandableRewards && reward.details ? 'cursor-pointer' : ''}`}
+                        onClick={(e) => expandableRewards && reward.details ? toggleRewardDetails(index, e) : null}
+                      >
                         <div>
                           <div className="font-medium text-white">
                             {reward.name}
@@ -257,20 +272,46 @@ const EventProgressBar: React.FC<EventProgressBarProps> = ({
                             {reward.description}
                           </div>
                         </div>
-                        <div
-                          className="text-xs px-2 py-1 rounded-full"
-                          style={{
-                            backgroundColor: isUnlocked
-                              ? "rgba(16, 185, 129, 0.2)"
-                              : `${accentColor}20`,
-                            color: isUnlocked ? "#10B981" : accentColor,
-                          }}
-                        >
-                          {isUnlocked
-                            ? "Unlocked"
-                            : `${reward.threshold.toLocaleString()} ${unit}`}
+                        <div className="flex items-center">
+                          <div
+                            className="text-xs px-2 py-1 rounded-full mr-2"
+                            style={{
+                              backgroundColor: isUnlocked
+                                ? "rgba(16, 185, 129, 0.2)"
+                                : `${accentColor}20`,
+                              color: isUnlocked ? "#10B981" : accentColor,
+                            }}
+                          >
+                            {isUnlocked
+                              ? "Unlocked"
+                              : `${reward.threshold.toLocaleString()} ${unit}`}
+                          </div>
+                          {expandableRewards && reward.details && (
+                            expandedRewardIndex === index ? 
+                              <FaChevronUp className="text-slate-400" /> : 
+                              <FaChevronDown className="text-slate-400" />
+                          )}
                         </div>
                       </div>
+                      
+                      {/* Expandable details */}
+                      {expandableRewards && reward.details && (
+                        <AnimatePresence>
+                          {expandedRewardIndex === index && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="mt-3 pt-3 border-t border-slate-700/30 text-sm text-slate-300">
+                                {reward.details}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      )}
                     </div>
                   );
                 })}
